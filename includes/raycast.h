@@ -60,6 +60,10 @@ typedef struct s_data	t_data;
 int						close_game(t_data *game);
 int						has_wall_at(t_data *game, int x, int y);
 int						handle_input(int key, t_data *game);
+
+int key_press(int key, t_data *game);
+int key_release(int key, t_data *game);
+
 int						gamemlx(t_data *game, char *map, char *argv[]);
 int						load_all_textures(t_data *game);
 void					destroy_all(t_data *game);

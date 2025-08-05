@@ -44,6 +44,9 @@ void	init_data(t_data *data)
 	data->mlx = NULL;
     data->win = NULL;
     data->img = NULL;
+
+	for (int i = 0; i < 65536; i++)
+    	data->keys[i] = 0;
 }
 
 int	main(int ac, char **av)
@@ -84,7 +87,8 @@ int	main(int ac, char **av)
 	}
 	render_map(&data);
 	mlx_hook(data.win, 17, 0, close_game, &data);
-	mlx_hook(data.win, 2, 1L << 0, handle_input, &data);
+	mlx_hook(data.win, 2, 1L << 0, key_press, &data);    
+	mlx_hook(data.win, 3, 1L << 1, key_release, &data);
 	mlx_loop_hook(data.mlx, main_loop, &data);
 	mlx_loop(data.mlx);
 	cleanup_data(&data);

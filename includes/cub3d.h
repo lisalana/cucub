@@ -85,6 +85,7 @@ typedef struct s_data
 	t_img			*img;
 	t_door_state	*doors;
 	int				door_count;
+	int	keys[65536];
 }					t_data;
 
 // ========== FONCTIONS DEV ==========
