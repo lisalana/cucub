@@ -122,6 +122,8 @@ int					check_path(t_data *data);
 int					check_files(t_config *config);
 int					check_map(t_data *data);
 int					check_content(t_data *data);
+void convert_spaces_to_walls(t_data *data);
+
 
 // ========== FONCTIONS PRINCIPALES ==========
 void				init_data(t_data *data);

@@ -126,6 +126,25 @@ int check_spaces(t_data *data)
 	return (1);
 }
 
+void convert_spaces_to_walls(t_data *data)
+{
+	int y, x;
+
+	y = 0;
+	while (y < data->map_height)
+	{
+		x = 0;
+		while (data->map[y][x])
+		{
+			if (data->map[y][x] == ' ')
+				data->map[y][x] = '1';
+			x++;
+		}
+		y++;
+	}
+}
+
+
 int	file_exists(char *filename)
 {
 	int	fd;
@@ -196,6 +215,9 @@ int check_map(t_data *data)
 		return (printf("Error: Map is not closed by walls\n"), 0);
 	if (!check_spaces(data))
 		return (printf("Error: Invalid space configuration\n"), 0);
+	
+	convert_spaces_to_walls(data);
+
 	if (!check_player_not_trapped(data))
 		return (0);
 	if (!check_path(data))
