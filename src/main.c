@@ -14,6 +14,7 @@
 
 void	init_data(t_data *data)
 {
+	int i = 0;
 	data->config.texture_north = NULL;
 	data->config.texture_south = NULL;
 	data->config.texture_west = NULL;
@@ -36,8 +37,8 @@ void	init_data(t_data *data)
 	data->player.plane[1] = 0;
 	data->player.turnDirection = 0;
 	data->player.walkDirection = 0;
-	data->player.moveSpeed = 4.0;
-	data->player.rotationSpeed = 0.1;
+	data->player.moveSpeed = 0.5; //4.0;
+	data->player.rotationSpeed = 0.5; //0.1;
 	data->player.direction = '\0';
 	data->player.texture_player = NULL;
 	
@@ -45,8 +46,11 @@ void	init_data(t_data *data)
     data->win = NULL;
     data->img = NULL;
 
-	for (int i = 0; i < 65536; i++)
+	while (i < 65536)
+	{
     	data->keys[i] = 0;
+    	i++;
+	}
 }
 
 int	main(int ac, char **av)

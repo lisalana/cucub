@@ -12,20 +12,6 @@
 
 #include "cub3d.h"
 
-// int	handle_input(int key, t_data *game)
-// {
-// 	if (key == 65307)
-// 		close_game(game);
-// 	if (key == MOVE_UP || key == ARROW_UP)
-// 		update(game);
-// 	if (key == MOVE_LEFT || key == ARROW_LEFT)
-// 		update(game);
-// 	if (key == MOVE_RIGHT || key == ARROW_RIGHT)
-// 		update(game);
-// 	if (key == MOVE_DOWN || key == ARROW_DOWN)
-// 		update(game);
-// 	return (0);
-// }
  // Marquer la touche comme pressée
 int key_press(int key, t_data *game)
 {

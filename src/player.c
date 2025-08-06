@@ -41,21 +41,9 @@ void init_player(t_data *game)
     game->player.plane[1] = game->player.dir[0] * 0.66;
     game->player.turnDirection = 0;
     game->player.walkDirection = 0;
-    game->player.moveSpeed = 4.0;
-    game->player.rotationSpeed = 0.1;
+    game->player.moveSpeed = 0.5; //4.0;
+    game->player.rotationSpeed = 0.3; //0.1;
 }
-
-// static void moveset(int key, t_data *game)
-// {
-//     if (key == MOVE_RIGHT || key == ARROW_RIGHT)
-//         game->player.turnDirection = 1;
-//     if (key == MOVE_LEFT || key == ARROW_LEFT)
-//         game->player.turnDirection = -1;
-//     if (key == MOVE_UP || key == ARROW_UP)
-//         game->player.walkDirection = 1;
-//     if (key == MOVE_DOWN || key == ARROW_DOWN)
-//         game->player.walkDirection = -1;
-// }
 
 void rotate_player(t_data *game, double angle)
 {
@@ -85,15 +73,10 @@ void update(t_data *game)
     int mapY;
     double rotation_angle;
     
-    // NE PLUS remettre à zéro ! Les directions viennent de main_loop
-    // game->player.turnDirection = 0;  ← SUPPRIMER
-    // game->player.walkDirection = 0;  ← SUPPRIMER
-    // moveset(key, game);              ← SUPPRIMER
-    
     // Rotation si nécessaire
     if (game->player.turnDirection != 0)
     {
-        rotation_angle = game->player.turnDirection * 0.05;
+        rotation_angle = game->player.turnDirection * 0.01;
         rotate_player(game, rotation_angle);
     }
     
@@ -113,39 +96,3 @@ void update(t_data *game)
         }
     }
 }
-
-// void update(int key, t_data *game)
-// {
-//     double moveStep;
-//     double newX;
-//     double newY;
-//     int mapX;
-//     int mapY;
-//     double rotation_angle;
-    
-//     game->player.turnDirection = 0;
-//     game->player.walkDirection = 0;
-//     moveset(key, game);
-    
-//     if (game->player.turnDirection != 0)
-//     {
-//         // rotation_angle = game->player.turnDirection * game->player.rotationSpeed;
-//         rotation_angle = game->player.turnDirection * 0.05;
-//         rotate_player(game, rotation_angle);
-//     }
-    
-//     if (game->player.walkDirection != 0)
-//     {
-//         moveStep = game->player.walkDirection * game->player.moveSpeed;
-//         newX = game->player.pos[0] + game->player.dir[0] * moveStep;
-//         newY = game->player.pos[1] + game->player.dir[1] * moveStep;
-//         mapX = (int)(newX / TILESIZE);
-//         mapY = (int)(newY / TILESIZE);
-        
-//         if (!has_wall_at(game, mapX, mapY))
-//         {
-//             game->player.pos[0] = newX;
-//             game->player.pos[1] = newY;
-//         }
-//     }
-// }
