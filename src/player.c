@@ -95,3 +95,4 @@ void update(t_data *game)
         }
     }
 }
+
