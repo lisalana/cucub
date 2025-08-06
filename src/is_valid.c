@@ -203,8 +203,8 @@ int check_map(t_data *data)
 		return (printf("Error: Missing floor color (F)\n"), 0);
 	if (data->config.ceiling_color == -1)
 		return (printf("Error: Missing ceiling color (C)\n"), 0);
-	if (!data->config.texture_north || !data->config.texture_south || 
-			!data->config.texture_west || !data->config.texture_est)
+	if (!data->config.texture_north || !data->config.texture_south 
+		|| !data->config.texture_west || !data->config.texture_est)
 		return (printf("Error: Missing texture(s)\n"), 0);
 	if (!check_content(data))
 		return (printf("Error: Invalid characters in map\n"), 0);

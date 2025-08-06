@@ -73,14 +73,13 @@ void update(t_data *game)
     int mapY;
     double rotation_angle;
     
-    // Rotation si nécessaire
+    // Rotation
     if (game->player.turnDirection != 0)
     {
         rotation_angle = game->player.turnDirection * 0.01;
         rotate_player(game, rotation_angle);
     }
-    
-    // Mouvement si nécessaire  
+    // Mouvement
     if (game->player.walkDirection != 0)
     {
         moveStep = game->player.walkDirection * game->player.moveSpeed;
