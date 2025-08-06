@@ -42,7 +42,7 @@ void init_player(t_data *game)
     game->player.turnDirection = 0;
     game->player.walkDirection = 0;
     game->player.moveSpeed = 0.5; //4.0;
-    game->player.rotationSpeed = 0.3; //0.1;
+    game->player.rotationSpeed = 0.5; //0.1;
 }
 
 void rotate_player(t_data *game, double angle)
@@ -76,7 +76,7 @@ void update(t_data *game)
     // Rotation
     if (game->player.turnDirection != 0)
     {
-        rotation_angle = game->player.turnDirection * 0.01;
+        rotation_angle = game->player.turnDirection * 0.02;
         rotate_player(game, rotation_angle);
     }
     // Mouvement
