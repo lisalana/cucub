@@ -116,7 +116,6 @@ int				parse_color_line(char *line, t_config *config);
 int				is_texture_line(char *line);
 int				parse_texture_line(char *line, t_config *config);
 char			*extract_texture_path(char *trimmed);
-// int				assign_texture(char *trimmed, char *path, t_config *config);
 int				assign_texture_by_direction(t_config *config, char *path,
 					char *direction);
 int				is_map_line(char *line);
