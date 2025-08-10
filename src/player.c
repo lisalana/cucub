@@ -12,10 +12,40 @@
 
 #include "cub3d.h"
 
-void	init_player(t_data *game)
+// void	init_player(t_data *game)
+// {
+// 	game->player.pos[0] = game->player.pos[0] * TILESIZE + TILESIZE / 2;
+// 	game->player.pos[1] = game->player.pos[1] * TILESIZE + TILESIZE / 2;
+// 	if (game->player.direction == 'N')
+// 	{
+// 		game->player.dir[0] = 0.0;
+// 		game->player.dir[1] = -1.0;
+// 	}
+// 	else if (game->player.direction == 'S')
+// 	{
+// 		game->player.dir[0] = 0.0;
+// 		game->player.dir[1] = 1.0;
+// 	}
+// 	else if (game->player.direction == 'E')
+// 	{
+// 		game->player.dir[0] = 1.0;
+// 		game->player.dir[1] = 0.0;
+// 	}
+// 	else if (game->player.direction == 'W')
+// 	{
+// 		game->player.dir[0] = -1.0;
+// 		game->player.dir[1] = 0.0;
+// 	}
+// 	game->player.plane[0] = -game->player.dir[1] * 0.66;
+// 	game->player.plane[1] = game->player.dir[0] * 0.66;
+// 	game->player.turndirection = 0;
+// 	game->player.walkdirection = 0;
+// 	game->player.movespeed = 1.5;
+// 	game->player.rotationspeed = 0.5;
+// }
+
+static void	set_player_direction_and_plane(t_data *game)
 {
-	game->player.pos[0] = game->player.pos[0] * TILESIZE + TILESIZE / 2;
-	game->player.pos[1] = game->player.pos[1] * TILESIZE + TILESIZE / 2;
 	if (game->player.direction == 'N')
 	{
 		game->player.dir[0] = 0.0;
@@ -38,10 +68,22 @@ void	init_player(t_data *game)
 	}
 	game->player.plane[0] = -game->player.dir[1] * 0.66;
 	game->player.plane[1] = game->player.dir[0] * 0.66;
+}
+
+static void	set_player_movement_params(t_data *game)
+{
 	game->player.turndirection = 0;
 	game->player.walkdirection = 0;
 	game->player.movespeed = 1.5;
 	game->player.rotationspeed = 0.5;
+}
+
+void	init_player(t_data *game)
+{
+	game->player.pos[0] = game->player.pos[0] * TILESIZE + TILESIZE / 2;
+	game->player.pos[1] = game->player.pos[1] * TILESIZE + TILESIZE / 2;
+	set_player_direction_and_plane(game);
+	set_player_movement_params(game);
 }
 
 void	rotate_player(t_data *game, double angle)

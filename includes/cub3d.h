@@ -116,7 +116,7 @@ int				parse_color_line(char *line, t_config *config);
 int				is_texture_line(char *line);
 int				parse_texture_line(char *line, t_config *config);
 char			*extract_texture_path(char *trimmed);
-int				assign_texture(char *trimmed, char *path, t_config *config);
+// int				assign_texture(char *trimmed, char *path, t_config *config);
 int				assign_texture_by_direction(t_config *config, char *path,
 					char *direction);
 int				is_map_line(char *line);
@@ -138,6 +138,9 @@ void			convert_spaces_to_walls(t_data *data);
 int				check_player_not_trapped(t_data *data);
 
 // ========== FONCTIONS PRINCIPALES ==========
+
+void			init_player_and_keys(t_data *data);
+void			init_config_and_player(t_data *data);
 void			init_data(t_data *data);
 int				check_file_extension(char *filename);
 int				main_loop(t_data *game);

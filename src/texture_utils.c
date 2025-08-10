@@ -42,26 +42,26 @@ void	calculate_texture_x(t_data *game, int *tex_x, int tex_width)
 		*tex_x = tex_width - 1;
 }
 
-void calculate_texture_y_and_color(t_data *game, void *texture, t_point pos, int *color)
+void	calculate_texture_y_and_color(t_data *game, void *texture, t_point pos,
+		int *color)
 {
-    int tex_y;
-    double line_height;
-    double exact_start;
-    t_point coord;
+	int		tex_y;
+	double	line_height;
+	double	exact_start;
+	t_point	coord;
 
-    line_height = (double)WINDOW_HEIGHT / game->config.distance * TILESIZE;
-    exact_start = ((double)WINDOW_HEIGHT - line_height) / 2.0;
-    tex_y = (int)(((double)(pos.y - exact_start) / line_height) * 64);
-    if (tex_y < 0)
-        tex_y = 0;
-    if (tex_y >= 64)
-        tex_y = 63;
-    
-    coord.x = pos.x;
-    coord.y = tex_y;
-    *color = get_texture_pixel(texture, coord, 64, 64);
-    exact_start = 1.0 - (game->config.distance / (TILESIZE * 20));
-    if (exact_start < 0.3)
-        exact_start = 0.3;
-    *color = darken_color(*color, exact_start);
+	line_height = (double)WINDOW_HEIGHT / game->config.distance * TILESIZE;
+	exact_start = ((double)WINDOW_HEIGHT - line_height) / 2.0;
+	tex_y = (int)(((double)(pos.y - exact_start) / line_height) * 64);
+	if (tex_y < 0)
+		tex_y = 0;
+	if (tex_y >= 64)
+		tex_y = 63;
+	coord.x = pos.x;
+	coord.y = tex_y;
+	*color = get_texture_pixel(texture, coord, 64, 64);
+	exact_start = 1.0 - (game->config.distance / (TILESIZE * 20));
+	if (exact_start < 0.3)
+		exact_start = 0.3;
+	*color = darken_color(*color, exact_start);
 }

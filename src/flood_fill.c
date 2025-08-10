@@ -42,26 +42,26 @@ int	is_border(t_data *data, int x, int y)
 	return (0);
 }
 
-void flood_fill(char **map, t_point pos, t_data *data, int *valid)
+void	flood_fill(char **map, t_point pos, t_data *data, int *valid)
 {
-    if (*valid == 0)
-        return ;
-    if (pos.y < 0 || pos.y >= data->map_height)
-        return ;
-    if (pos.x < 0 || pos.x >= (int)ft_str_len(map[pos.y]))
-        return ;
-    if (map[pos.y][pos.x] == '1' || map[pos.y][pos.x] == 'V')
-        return ;
-    if (map[pos.y][pos.x] == ' ')
-        return ;
-    if (is_border(data, pos.x, pos.y))
-    {
-        *valid = 0;
-        return ;
-    }
-    map[pos.y][pos.x] = 'V';
-    flood_fill(map, (t_point){pos.x - 1, pos.y}, data, valid);
-    flood_fill(map, (t_point){pos.x + 1, pos.y}, data, valid);
-    flood_fill(map, (t_point){pos.x, pos.y - 1}, data, valid);
-    flood_fill(map, (t_point){pos.x, pos.y + 1}, data, valid);
+	if (*valid == 0)
+		return ;
+	if (pos.y < 0 || pos.y >= data->map_height)
+		return ;
+	if (pos.x < 0 || pos.x >= (int)ft_str_len(map[pos.y]))
+		return ;
+	if (map[pos.y][pos.x] == '1' || map[pos.y][pos.x] == 'V')
+		return ;
+	if (map[pos.y][pos.x] == ' ')
+		return ;
+	if (is_border(data, pos.x, pos.y))
+	{
+		*valid = 0;
+		return ;
+	}
+	map[pos.y][pos.x] = 'V';
+	flood_fill(map, (t_point){pos.x - 1, pos.y}, data, valid);
+	flood_fill(map, (t_point){pos.x + 1, pos.y}, data, valid);
+	flood_fill(map, (t_point){pos.x, pos.y - 1}, data, valid);
+	flood_fill(map, (t_point){pos.x, pos.y + 1}, data, valid);
 }

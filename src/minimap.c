@@ -195,103 +195,68 @@ static void	render_precise_tiles(t_data *game)
 		minimap_y++;
 	}
 }
-static void draw_fov_lines(t_data *game, int center_x, int center_y)
+static void	draw_fov_lines(t_data *game, int center_x, int center_y)
 {
-    double player_angle;
-    double fov_angle;
-    int fov_length;
-    int i;
+	double	player_angle;
+	double	fov_angle;
+	int		fov_length;
+	int		i;
+	double	angle;
+	t_point	begin;
+	t_point	end;
 
-    player_angle = atan2(game->player.dir[1], game->player.dir[0]);
-    fov_angle = M_PI / 3.0;
-    fov_length = MINIMAP_TILE_SIZE * 3;
-    i = -1;
-    while (i <= 1)
-    {
-        double angle = player_angle + (fov_angle / 2.0) * i;
-        t_point begin = {center_x, center_y};
-        t_point end = {center_x + (int)(cos(angle) * fov_length), 
-                       center_y + (int)(sin(angle) * fov_length)};
-        draw_line(game, begin, end, COLOR_FOV_LINE);
-        i += 2;
-    }
+	player_angle = atan2(game->player.dir[1], game->player.dir[0]);
+	fov_angle = M_PI / 3.0;
+	fov_length = MINIMAP_TILE_SIZE * 3;
+	i = -1;
+	while (i <= 1)
+	{
+		angle = player_angle + (fov_angle / 2.0) * i;
+		begin.x = center_x;
+		begin.y = center_y;
+		end.x = center_x + (int)(cos(angle) * fov_length);
+		end.y = center_y + (int)(sin(angle) * fov_length);
+		draw_line(game, begin, end, COLOR_FOV_LINE);
+		i += 2;
+	}
 }
 
-static void draw_player_direction(t_data *game, int center_x, int center_y)
+static void	draw_player_direction(t_data *game, int center_x, int center_y)
 {
-    double dir_length;
-    t_point center;
-    t_point dir_end;
-    
-    dir_length = MINIMAP_PLAYER_SIZE * 1.8;
-    center.x = center_x;
-    center.y = center_y;
-    dir_end.x = center_x + (int)(game->player.dir[0] * dir_length);
-    dir_end.y = center_y + (int)(game->player.dir[1] * dir_length);
-    
-    draw_line(game, center, dir_end, COLOR_DIRECTION);
-    center.x++;
-    dir_end.x++;
-    draw_line(game, center, dir_end, COLOR_DIRECTION);
-    center.x--;
-    center.y++;
-    dir_end.x--;
-    dir_end.y++;
-    draw_line(game, center, dir_end, COLOR_DIRECTION);
+	double	dir_length;
+	t_point	center;
+	t_point	dir_end;
+
+	dir_length = MINIMAP_PLAYER_SIZE * 1.8;
+	center.x = center_x;
+	center.y = center_y;
+	dir_end.x = center_x + (int)(game->player.dir[0] * dir_length);
+	dir_end.y = center_y + (int)(game->player.dir[1] * dir_length);
+	draw_line(game, center, dir_end, COLOR_DIRECTION);
+	center.x++;
+	dir_end.x++;
+	draw_line(game, center, dir_end, COLOR_DIRECTION);
+	center.x--;
+	center.y++;
+	dir_end.x--;
+	dir_end.y++;
+	draw_line(game, center, dir_end, COLOR_DIRECTION);
 }
 
-static void draw_modern_player(t_data *game)
+static void	draw_modern_player(t_data *game)
 {
-    int center_x;
-    int center_y;
+	int	center_x;
+	int	center_y;
 
-    center_x = MINIMAP_MARGIN + MINIMAP_SIZE / 2;
-    center_y = WINDOW_HEIGHT - MINIMAP_SIZE - MINIMAP_MARGIN + MINIMAP_SIZE / 2;
-    
-    draw_fov_lines(game, center_x, center_y);
-    draw_circle(game, center_x, center_y, MINIMAP_PLAYER_SIZE / 2 + 1, 0x000000);
-    draw_circle(game, center_x, center_y, MINIMAP_PLAYER_SIZE / 2, COLOR_PLAYER);
-    draw_player_direction(game, center_x, center_y);
+	center_x = MINIMAP_MARGIN + MINIMAP_SIZE / 2;
+	center_y = WINDOW_HEIGHT - MINIMAP_SIZE - MINIMAP_MARGIN + MINIMAP_SIZE / 2;
+	draw_fov_lines(game, center_x, center_y);
+	draw_circle(game, center_x, center_y, MINIMAP_PLAYER_SIZE / 2 + 1,
+		0x000000);
+	draw_circle(game, center_x, center_y, MINIMAP_PLAYER_SIZE / 2,
+		COLOR_PLAYER);
+	draw_player_direction(game, center_x, center_y);
 }
-
-// static void	draw_modern_player(t_data *game)
-// {
-// 	int		center_x;
-// 	int		center_y;
-// 	double	player_angle;
-// 	int		fov_length;
-// 	int		i;
-// 	double	angle;
-// 	int		end_x;
-// 	int		end_y;
-// 	double	dir_length;
-// 	double	fov_angle;
-
-// 	center_x = MINIMAP_MARGIN + MINIMAP_SIZE / 2;
-// 	center_y = WINDOW_HEIGHT - MINIMAP_SIZE - MINIMAP_MARGIN + MINIMAP_SIZE / 2;
-// 	fov_angle = M_PI / 3.0;
-// 	player_angle = atan2(game->player.dir[1], game->player.dir[0]);
-// 	fov_length = MINIMAP_TILE_SIZE * 3;
-// 	i = -1;
-// 	while (i <= 1)
-// 	{
-// 		angle = player_angle + (fov_angle / 2.0) * i;
-// 		end_x = center_x + (int)(cos(angle) * fov_length);
-// 		end_y = center_y + (int)(sin(angle) * fov_length);
-// 		draw_line(game, center_x, center_y, end_x, end_y, COLOR_FOV_LINE);
-// 		i += 2;
-// 	}
-// 	draw_circle(game, center_x, center_y, MINIMAP_PLAYER_SIZE / 2 + 1,
-// 		0x000000);
-// 	draw_circle(game, center_x, center_y, MINIMAP_PLAYER_SIZE / 2,
-// 		COLOR_PLAYER);
-// 	dir_length = MINIMAP_PLAYER_SIZE * 1.8;
-// 	end_x = center_x + (int)(game->player.dir[0] * dir_length);
-// 	end_y = center_y + (int)(game->player.dir[1] * dir_length);
-// 	draw_line(game, center_x, center_y, end_x, end_y, COLOR_DIRECTION);
-// 	draw_line(game, center_x + 1, center_y, end_x + 1, end_y, COLOR_DIRECTION);
-// 	draw_line(game, center_x, center_y + 1, end_x, end_y + 1, COLOR_DIRECTION);
-// }
 
 void	render_minimap(t_data *game)
 {

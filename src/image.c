@@ -59,19 +59,20 @@ int	darken_color(int original_color, double ratio)
 	return ((r << 16) | (g << 8) | b);
 }
 
-int get_texture_pixel(void *texture, t_point coord, int tex_width, int tex_height)
+int	get_texture_pixel(void *texture, t_point coord, int tex_width,
+		int tex_height)
 {
-    char *data;
-    int bits_per_pixel;
-    int line_length;
-    int endian;
-    int *pixel_ptr;
+	char	*data;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		*pixel_ptr;
 
-    if (!texture || coord.x < 0 || coord.x >= tex_width || 
-        coord.y < 0 || coord.y >= tex_height)
-        return (0x000000);
-    data = mlx_get_data_addr(texture, &bits_per_pixel, &line_length, &endian);
-    pixel_ptr = (int *)(data + (coord.y * line_length + coord.x * (bits_per_pixel / 8)));
-    return (*pixel_ptr);
+	if (!texture || coord.x < 0 || coord.x >= tex_width || coord.y < 0
+		|| coord.y >= tex_height)
+		return (0x000000);
+	data = mlx_get_data_addr(texture, &bits_per_pixel, &line_length, &endian);
+	pixel_ptr = (int *)(data + (coord.y * line_length + coord.x
+				* (bits_per_pixel / 8)));
+	return (*pixel_ptr);
 }
-
